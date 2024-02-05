@@ -106,7 +106,7 @@ class KMeansAlgorithm:
         Parameters
         ----------
             points (np.ndarray): Data points.
-¿
+            
         Returns
         -------
             np.ndarray: Final centroids.

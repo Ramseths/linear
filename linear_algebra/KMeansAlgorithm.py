@@ -39,15 +39,12 @@ class KMeansAlgorithm:
         -------
             np.ndarray: Distances between data points and centroids.
         """
-        # Get matrix with zeros (0)
-        distances = np.zeros((points.shape[0], self.centroids.shape[0]))
-
-        # Iteration through each point and centroid and ccalculate the euclidean distance
-        for i, point in enumerate(points):
-            for j, centroid in enumerate(self.centroids):
-                distances[i, j] = np.linalg.norm(point - centroid)
-
+        # Apply broadcasting to get differences
+        differences = points[:, np.newaxis, :]-self.centroids[np.newaxis, :, :]
+        # Squaare root to get euclidean distance
+        distances = np.sqrt(np.sum(differences**2, axis=2))
         return distances
+
     
     def closest_centroid(self, distances):
         """
